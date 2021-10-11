@@ -122,7 +122,8 @@ class Collapse extends BaseComponent {
 
     let activeChildren = []
 
-    if (this._config.parent) { // find active children
+    // find active children
+    if (this._config.parent) {
       activeChildren = this._getFirstLevelChildren(SELECTOR_ACTIVES)
         .filter(el => el !== this._element)
         .map(el => Collapse.getOrCreateInstance(el, { toggle: false }))
@@ -237,7 +238,9 @@ class Collapse extends BaseComponent {
       return
     }
 
-    for (const element of this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE)) {
+    const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE)
+
+    for (const element of children) {
       const selected = getElementFromSelector(element)
 
       if (selected) {
