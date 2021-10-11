@@ -172,14 +172,13 @@ $(function () {
     $(content).appendTo('#qunit-fixture')
 
     var stickyTopEl = $('.sticky-top')
-    var originalMargin = Number.parseInt(stickyTopEl.css('margin-right'), 10)
-    var originalPadding = Number.parseInt(stickyTopEl.css('padding-right'), 10)
-    var modalEl = $('.modal')
-    var modal = modalEl.bootstrapModal()
+    var originalMargin = stickyTopEl.css('margin-right')
+    var originalPadding = stickyTopEl.css('padding-right')
 
-    modalEl.on('shown.bs.modal', function () {
-      var currentMargin = Number.parseInt(stickyTopEl.css('margin-right'), 10)
-      var currentPadding = Number.parseInt(stickyTopEl.css('padding-right'), 10)
+    var modal = $('.modal')
+    modal.on('shown.bs.modal', function () {
+      var currentMargin = stickyTopEl.css('margin-right')
+      var currentPadding = stickyTopEl.css('padding-right')
 
       assert.strictEqual(currentMargin, originalMargin, 'sticky element\'s margin should not be adjusted while opening')
       assert.strictEqual(currentPadding, originalPadding, 'sticky element\'s padding should not be adjusted while opening')
