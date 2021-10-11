@@ -484,31 +484,31 @@ class Modal {
 
       // Adjust fixed content padding
       $(fixedContent).each((index, element) => {
-        const actualPadding = element.style.paddingRight
-        const calculatedPadding = $(element).css('padding-right')
-        $(element)
-          .data('padding-right', actualPadding)
-          .css('padding-right', `${parseFloat(calculatedPadding) + this._scrollbarWidth}px`)
+        this._setElementAttributes(element, 'paddingRight', 'padding-right')
       })
 
       // Adjust sticky content margin
       $(stickyContent).each((index, element) => {
-        const actualMargin = element.style.marginRight
-        const calculatedMargin = $(element).css('margin-right')
-        $(element)
-          .data('margin-right', actualMargin)
-          .css('margin-right', `${parseFloat(calculatedMargin) - this._scrollbarWidth}px`)
+        this._setElementAttributes(element, 'marginRight', 'margin-right')
       })
 
       // Adjust body padding
-      const actualPadding = document.body.style.paddingRight
-      const calculatedPadding = $(document.body).css('padding-right')
-      $(document.body)
-        .data('padding-right', actualPadding)
-        .css('padding-right', `${parseFloat(calculatedPadding) + this._scrollbarWidth}px`)
+      this._setElementAttributes(document.body, 'paddingRight', 'padding-right')
     }
 
     $(document.body).addClass(CLASS_NAME_OPEN)
+  }
+
+  _setElementAttributes(element, styleProp, cssProperty) {
+    if (element !== document.body && window.innerWidth > element.clientWidth + this._scrollbarWidth) {
+      return
+    }
+
+    const actualValue = element.style[styleProp]
+    const calculatedPadding = $(element).css(cssProperty)
+    $(element)
+      .data(cssProperty, actualValue)
+      .css(cssProperty, `${parseFloat(calculatedPadding) + this._scrollbarWidth}px`)
   }
 
   _resetScrollbar() {

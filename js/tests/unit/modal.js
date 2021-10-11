@@ -162,6 +162,33 @@ $(function () {
       .bootstrapModal('toggle')
   })
 
+  QUnit.test('should not adjust the inline margin and padding of sticky and fixed elements when element do not have full width', function (assert) {
+    assert.expect(2)
+    var done = assert.async()
+    var content = [
+      '<div class="sticky-top" style="margin-right: 0; padding-right: 0; width: calc(100vw - 50%)"></div>',
+      '<div class="modal"><div class="modal-dialog"></div></div>'
+    ].join('')
+    $(content).appendTo('#qunit-fixture')
+
+    var stickyTopEl = $('.sticky-top')
+    var originalMargin = Number.parseInt(stickyTopEl.css('margin-right'), 10)
+    var originalPadding = Number.parseInt(stickyTopEl.css('padding-right'), 10)
+    var modalEl = $('.modal')
+    var modal = modalEl.bootstrapModal()
+
+    modalEl.on('shown.bs.modal', function () {
+      var currentMargin = Number.parseInt(stickyTopEl.css('margin-right'), 10)
+      var currentPadding = Number.parseInt(stickyTopEl.css('padding-right'), 10)
+
+      assert.strictEqual(currentMargin, originalMargin, 'sticky element\'s margin should not be adjusted while opening')
+      assert.strictEqual(currentPadding, originalPadding, 'sticky element\'s padding should not be adjusted while opening')
+      done()
+    })
+
+    modal.bootstrapModal('show')
+  })
+
   QUnit.test('should remove from dom when click [data-dismiss="modal"]', function (assert) {
     assert.expect(3)
     var done = assert.async()
