@@ -392,6 +392,14 @@ Removes the ability for an element's tooltip to be shown. The tooltip will only 
 tooltip.disable()
 ```
 
+#### setContent
+
+Gives a way to change tooltip content, after its initialization
+
+```js
+tooltip.setContent({ '.tooltip-title': 'another title' })
+```
+
 #### toggleEnabled
 
 Toggles the ability for an element's tooltip to be shown or hidden.
