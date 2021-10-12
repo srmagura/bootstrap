@@ -16,9 +16,7 @@ import BaseComponent from './base-component'
 import { enableDismissTrigger } from './util/component-functions'
 
 /**
- * ------------------------------------------------------------------------
  * Constants
- * ------------------------------------------------------------------------
  */
 
 const NAME = 'toast'
@@ -52,9 +50,7 @@ const Default = {
 }
 
 /**
- * ------------------------------------------------------------------------
- * Class Definition
- * ------------------------------------------------------------------------
+ * Class definition
  */
 
 class Toast extends BaseComponent {
@@ -69,7 +65,6 @@ class Toast extends BaseComponent {
   }
 
   // Getters
-
   static get DefaultType() {
     return DefaultType
   }
@@ -83,7 +78,6 @@ class Toast extends BaseComponent {
   }
 
   // Public
-
   show() {
     const showEvent = EventHandler.trigger(this._element, EVENT_SHOW)
 
@@ -143,7 +137,6 @@ class Toast extends BaseComponent {
   }
 
   // Private
-
   _getConfig(config) {
     config = {
       ...Default,
@@ -210,7 +203,6 @@ class Toast extends BaseComponent {
   }
 
   // Static
-
   static jQueryInterface(config) {
     return this.each(function () {
       const data = Toast.getOrCreateInstance(this, config)
@@ -226,13 +218,14 @@ class Toast extends BaseComponent {
   }
 }
 
+/**
+ * Data API implementation
+ */
+
 enableDismissTrigger(Toast)
 
 /**
- * ------------------------------------------------------------------------
  * jQuery
- * ------------------------------------------------------------------------
- * add .Toast to jQuery only if jQuery is present
  */
 
 defineJQueryPlugin(Toast)
